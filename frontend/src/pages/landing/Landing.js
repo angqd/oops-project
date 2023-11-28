@@ -5,7 +5,7 @@ function Landing() {
   return (
     <div className=" w-11/12 pb-12 mt-16 top-1/2 mx-auto bg-mainBg bg-cover bg-center p-4 border-8 border-mainCol flex flex-row">
       <div className="w-full sm:w-1/2 px-8 sm:flex sm:flex-col gap-4 justify-center">
-        <h1 className=" font-bold text-4xl sm:text-7xl sm:tracking-wider uppercase">
+        <h1 className="font-bold text-4xl sm:text-7xl sm:tracking-wider uppercase">
           Welcome to BITSBIDS
         </h1>
         <p className=" capitalize text-md">

@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         mainCol: "#BCA37F",
         bgCol: "#FFF2D8",
+        red: "#FF0000",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
