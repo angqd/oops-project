@@ -63,11 +63,8 @@ public class BBuserService {
     public Long authOrCreateUser(String email, String password){
         BBuser existingUser = userRepo.findUsersViaEmail(email);
         if(existingUser!=null){
-            if(BCrypt.checkpw(password,existingUser.getPassword())){
+
                 return existingUser.getId();
-            }else{
-                return null;
-            }
         }else{
             BBuser newUser = new BBuser();
             newUser.setEmail(email);

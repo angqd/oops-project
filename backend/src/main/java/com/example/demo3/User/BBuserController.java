@@ -36,7 +36,7 @@ public class BBuserController {
     @PutMapping("/authUser")
     public Long AuthenticateOrCreateUser(@RequestBody Map<String,String> request){
         String email = request.get("email");
-        String password = request.get("password");
-        return userService.authOrCreateUser(email,password);
+        String name = request.get("name");
+        return userService.authOrCreateUser(email,name);
     }
 }
