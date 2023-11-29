@@ -39,4 +39,5 @@ public class BBuserController {
         String name = request.get("name");
         return userService.authOrCreateUser(email,name);
     }
+
 }

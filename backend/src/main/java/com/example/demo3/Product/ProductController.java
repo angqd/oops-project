@@ -1,5 +1,7 @@
 package com.example.demo3.Product;
 
+import com.example.demo3.Product.RequestClasses.ProductAddRequest;
+import com.example.demo3.Product.RequestClasses.ProductEditRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,24 @@ public class ProductController {
     public List<Product> getProducts(){
         return productService.getProducts();
     }
-    @PostMapping
-    public void addNewProducts(@RequestBody Product product){
-        productService.addNewProduct(product);
-    }
 
+    // ADD NEW PRODUCTS
+    @PostMapping(path="/add")
+    public void addProduct(@RequestBody ProductAddRequest request){
+        productService.addProduct(
+                request.getName(),
+                request.getDescription(),
+                request.getUid(),
+                request.getCreatedAt(),
+                request.getEndsAt(),
+                request.getCurrentBid()
+        );
+    }
+    // edit bids (PLACE BID )
+    @PostMapping(path = "/edit")
+    public void editBids(@RequestBody ProductEditRequest request) {
+        productService.editbids(request.getId(), request.getCurrentBid(), request.getBuyerId());
+    }
 
 
 }
