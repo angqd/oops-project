@@ -20,11 +20,15 @@ public class BBuserConfig {
             BBuser angad = new BBuser(
                     "Angad",
                     "angadbawa02@gmai.com",
+                    "vyas",
+                    "angs123",
                     9082350859L
             );
             BBuser ishan = new BBuser(
                     "ishan",
                     "ishan@gmail.com",
+                    "vk",
+                    "ishan123",
                     9619882330L
             );
             userRepo.saveAll(

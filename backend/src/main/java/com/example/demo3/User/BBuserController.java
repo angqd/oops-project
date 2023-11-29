@@ -18,14 +18,11 @@ public class BBuserController {
     public List<BBuser> getUsers(){
         return userService.getUsers();
     }
+    // addNewUser Function  used in SignUp
     @PostMapping
     public void addNewUser(@RequestBody BBuser bbuser){
         userService.addNewUser(bbuser);
     }
-    @GetMapping("/createUserWithProduct")
-    public String createUserWithProduct() {
-        userService.addUserWithProduct();
-        return "User created with associated product!";
-    }
+
 
 }

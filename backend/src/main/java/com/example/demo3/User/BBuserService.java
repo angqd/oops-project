@@ -32,11 +32,5 @@ public class BBuserService {
         userRepo.save(bbuser);
     }
     // new user plus product
-    public void addUserWithProduct(){
-        BBuser bbuser = new BBuser("John Doe", "john.doe@example.com", 123456789);
-        Product product = new Product("Light Bulb", "A bright light source", LocalDateTime.now());
-        bbuser.addUserProduct(product);
-        userRepo.save(bbuser);
-    }
 
 }
