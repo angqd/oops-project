@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
 @Table(name = "bbuser_table")
@@ -39,7 +40,7 @@ public class BBuser {
         this.email = email;
         this.username = username;
         this.hostel = hostel;
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         this.phoneNumber = phoneNumber;
         setDefaultUsername();
     }
@@ -48,7 +49,7 @@ public class BBuser {
         this.name = name;
         this.email = email;
         this.hostel = hostel;
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         this.phoneNumber = phoneNumber;
         setDefaultUsername();
     }
@@ -122,9 +123,13 @@ public class BBuser {
 
     public String getPassword(){return password;}
     public void SetPassword(String password){
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
 
 
 }
+/*
+now we need to implement a function that creates a wallet automatically when we
+create the user
+ */

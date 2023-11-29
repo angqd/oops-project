@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface BBuserRepo extends JpaRepository<BBuser,Long> {
     @Query("SELECT s FROM BBuser s WHERE s.email =?1")
     Optional<BBuser> findUsersByEmail(String email);
+    @Query("SELECT s FROM BBuser s WHERE s.username = :username")
+    public BBuser findUsersByUsername(String username);
 }
 //find by email

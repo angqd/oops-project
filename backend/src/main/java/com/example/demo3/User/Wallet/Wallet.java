@@ -1,5 +1,6 @@
 package com.example.demo3.User.Wallet;
 
+import com.example.demo3.User.BBuser;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,7 +26,19 @@ public class Wallet {
             generator = "wallet_sequence"
     )
     private long id;
-    private long uid;
+
+    public BBuser getBbuser() {
+        return bbuser;
+    }
+
+    public void setBbuser(BBuser bbuser) {
+        this.bbuser = bbuser;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private BBuser bbuser;
+
     private double balance;
 
     public Wallet() {
@@ -35,5 +48,20 @@ public class Wallet {
     }
 
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
 }
