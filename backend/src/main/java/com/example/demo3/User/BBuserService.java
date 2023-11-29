@@ -29,6 +29,8 @@ public class BBuserService {
         if(bbuserOptional.isPresent()){
             throw new IllegalStateException("email already in use ");
         }
+        String username = bbuser.getUsername();
+        bbuser.setUsername(username);
         userRepo.save(bbuser);
     }
     // new user plus product

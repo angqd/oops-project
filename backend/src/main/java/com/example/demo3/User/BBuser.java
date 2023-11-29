@@ -41,6 +41,7 @@ public class BBuser {
         this.hostel = hostel;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        setDefaultUsername();
     }
 
     public BBuser(String name, String email, String hostel, String password, long phoneNumber) {
@@ -90,6 +91,7 @@ public class BBuser {
 
     public void setUsername(String username) {
         this.username = username;
+        setDefaultUsername();;
     }
 
     public long getPhoneNumber() {
