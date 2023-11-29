@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { localStorage } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie"; // or import cookie from 'cookie';
 
 function Landing() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  useEffect(() => {
+    if (Cookies.get("storedCredential") === undefined) {
+      return;
+    }
+    const decoded = jwtDecode(Cookies.get("storedCredential"));
+    if (decoded.name === Cookies.get("Name")) {
+      setLoggedIn(true);
+    }
+  }, []);
+  const handleGoogleSignin = async (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log("Decoded:", decoded);
+    Cookies.set("Name", decoded.name, {
+      expires: 365,
+    });
+    Cookies.set("storedCredential", credentialResponse.credential, {
+      expires: 365,
+    });
+    window.location.reload();
+  };
+
   return (
     <div className=" w-11/12 pb-12 mt-16 top-1/2 mx-auto bg-mainBg bg-cover bg-center p-4 border-8 border-mainCol flex flex-row">
       <div className="w-full sm:w-1/2 px-8 sm:flex sm:flex-col gap-4 justify-center">
         <h1 className="font-bold text-4xl sm:text-7xl sm:tracking-wider uppercase">
           Welcome to BITSBIDS
         </h1>
+        {loggedIn ? (
+          <></>
+        ) : (
+          <GoogleLogin
+            onSuccess={handleGoogleSignin}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        )}
         <p className=" capitalize text-md">
           Your exclusive marketplace for all your shopping needs. Bid, buy and
           sell anonymously - Start shopping today!
