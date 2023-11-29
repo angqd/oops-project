@@ -31,11 +31,12 @@ public class BBuserController {
     public void addNewUser(@RequestBody BBuser bbuser){
         userService.addNewUser(bbuser);
     }
-    @PutMapping(path = "/getid")
-    public Long GetUid(@RequestBody Map<String, String> request){
-        String username = request.get("username");
+    // USE THIS FOR THE LOGIN
+    //Create new user using email and password only : wallet also created
+    @PutMapping("/authUser")
+    public Long AuthenticateOrCreateUser(@RequestBody Map<String,String> request){
+        String email = request.get("email");
         String password = request.get("password");
-        return userService.authandgetUid(username,password);
+        return userService.authOrCreateUser(email,password);
     }
-
 }

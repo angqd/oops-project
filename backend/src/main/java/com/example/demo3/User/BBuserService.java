@@ -60,5 +60,29 @@ public class BBuserService {
         return null;
     }
 
+    public Long authOrCreateUser(String email, String password){
+        BBuser existingUser = userRepo.findUsersViaEmail(email);
+        if(existingUser!=null){
+            if(BCrypt.checkpw(password,existingUser.getPassword())){
+                return existingUser.getId();
+            }else{
+                return null;
+            }
+        }else{
+            BBuser newUser = new BBuser();
+            newUser.setEmail(email);
+            newUser.SetPassword(password);
+            userRepo.save(newUser);
+
+
+            Wallet wallet = new Wallet();
+            wallet.setBbuser(newUser);
+            walletRepo.save(wallet);
+            userRepo.save(newUser);
+
+            return newUser.getId();
+        }
+    }
+
 
 }

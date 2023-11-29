@@ -1,6 +1,5 @@
 package com.example.demo3.Product;
 
-import com.example.demo3.User.BBuser;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -8,6 +7,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="product_table")
 public class Product {
+
+
 
     @Id
     @SequenceGenerator(
@@ -19,40 +20,61 @@ public class Product {
             strategy = GenerationType.SEQUENCE,
             generator = "product_sequence"
     )
+
     private long id;
 
     private long uid;
     private String name;
     private String description;
+
+
+
+    private double currentBid;
+    private boolean freezeBid;
+    private Long catId;
+    private boolean Sold;
+
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column
     private LocalDateTime createdAt;
+    private LocalDateTime endsAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private BBuser bbuser;
+
+    private long buyerId;
 
     public Product() {
     }
 
-    public Product(long id,long uid,  String name, String description, LocalDateTime createdAt) {
-        this.uid = uid;
+    public Product(long id, long uid, String name, String description, double currentBid, boolean freezeBid, Long catId, boolean sold,
+                   LocalDateTime createdAt, LocalDateTime endsAt, Long buyerId) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.createdAt = createdAt;
-    }
-
-
-    public Product( long uid, String name, String description, LocalDateTime createdAt) {
         this.uid = uid;
         this.name = name;
         this.description = description;
+        this.currentBid = currentBid;
+        this.freezeBid = freezeBid;
+        this.catId = catId;
+        Sold = sold;
         this.createdAt = createdAt;
+        this.endsAt = endsAt;
+        this.buyerId = buyerId;
     }
-    public void setbbuser(BBuser bbuser) {
-        this.bbuser = bbuser;
+
+    public Product(long uid, String name, String description, double currentBid, boolean freezeBid, Long catId, boolean sold, LocalDateTime createdAt,
+                   LocalDateTime endsAt, Long buyerId) {
+        this.uid = uid;
+        this.name = name;
+        this.description = description;
+        this.currentBid = currentBid;
+        this.freezeBid = freezeBid;
+        this.catId = catId;
+        Sold = sold;
+        this.createdAt = createdAt;
+        this.endsAt = endsAt;
+        this.buyerId = buyerId;
     }
+
     public long getId() {
         return id;
     }
@@ -84,4 +106,59 @@ public class Product {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public long getUid() {
+        return uid;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    public double getCurrentBid() {
+        return currentBid;
+    }
+
+    public void setCurrentBid(double currentBid) {
+        this.currentBid = currentBid;
+    }
+
+    public boolean isFreezeBid() {
+        return freezeBid;
+    }
+
+    public void setFreezeBid(boolean freezeBid) {
+        this.freezeBid = freezeBid;
+    }
+
+    public Long getCatId() {
+        return catId;
+    }
+
+    public void setCatId(Long catId) {
+        this.catId = catId;
+    }
+
+    public boolean isSold() {
+        return Sold;
+    }
+
+    public void setSold(boolean sold) {
+        Sold = sold;
+    }
+    public LocalDateTime getEndsAt() {
+        return endsAt;
+    }
+
+    public void setEndsAt(LocalDateTime endsAt) {
+        this.endsAt = endsAt;
+    }
+
+    public long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(long buyerId) {
+        this.buyerId = buyerId;
+    }
+
 }

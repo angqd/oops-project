@@ -53,7 +53,7 @@ public class BBuser {
         this.phoneNumber = phoneNumber;
         setDefaultUsername();
     }
-
+// AUTOMATICALLY PICKS FIRST ALPHABET AS USERNAME
     private void setDefaultUsername(){
         if(name != null && !name.isEmpty()){
             this.username = name.substring(0,1).toLowerCase();
