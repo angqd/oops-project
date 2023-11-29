@@ -6,7 +6,9 @@ import { jwtDecode } from "jwt-decode";
 const Shop = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [name, setName] = useState("");
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (Cookies.get("storedCredential") === undefined) {
       navigate("/");
@@ -19,10 +21,21 @@ const Shop = () => {
     } else {
       navigate("/");
     }
+
+    fetch("http://localhost:8080/api/v1/products")
+      .then((response) => response.json())
+      .then((data) => {
+        // Process the fetched products data here
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   }, []);
+
   return (
     <>
-      <div className="w-11/12  mt-16 top-1/2 mx-auto p-4 bg-white border-8 border-mainCol flex flex-row">
+      <div className="w-11/12 mt-16 top-1/2 mx-auto p-4 bg-white border-8 border-mainCol flex flex-row">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +55,15 @@ const Shop = () => {
         <h1>FILTER</h1>
         <h1>SORT</h1>
       </div>
-      <div className=" w-11/12 pb-12 mt-12 top-1/2 mx-auto bg-mainBg bg-cover bg-center p-4 border-8 border-mainCol flex flex-row"></div>
+      <div className="w-11/12 pb-12 mt-12 top-1/2 mx-auto bg-mainBg bg-cover bg-center p-4 border-8 border-mainCol flex flex-row gap-6 justify-evenly flex-wrap">
+        {products.map((product) => (
+          <div key={product.id} className="">
+            <img src="book.jpg" alt="Book" className="h-48" />
+            <h2>{product.name}</h2>
+            <h2>{product.price || 500}</h2>
+          </div>
+        ))}
+      </div>
     </>
   );
 };

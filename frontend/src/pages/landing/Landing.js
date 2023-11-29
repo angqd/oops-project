@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { localStorage } from "react";
+import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie"; // or import cookie from 'cookie';
 
 function Landing() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     if (Cookies.get("storedCredential") === undefined) {
       return;
@@ -49,10 +50,20 @@ function Landing() {
           sell anonymously - Start shopping today!
         </p>
         <div className="flex flex-row gap-12 mt-4">
-          <button className="bg-mainCol px-6 py-2 text-white font-bold text-md">
+          <button
+            onClick={() => {
+              navigate("/shop");
+            }}
+            className="bg-mainCol px-6 py-2 text-white font-bold text-md"
+          >
             Start Shopping
           </button>
-          <button className="bg-mainCol px-6 py-2 text-white font-bold text-md">
+          <button
+            onClick={() => {
+              navigate("/sell");
+            }}
+            className="bg-mainCol px-6 py-2 text-white font-bold text-md"
+          >
             Start Selling
           </button>
         </div>
