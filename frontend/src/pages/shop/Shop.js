@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Shop = () => {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (Cookies.get("storedCredential") === undefined) {
+      navigate("/");
+      return;
+    }
+    const decoded = jwtDecode(Cookies.get("storedCredential"));
+    if (decoded.name === Cookies.get("Name")) {
+      setLoggedIn(true);
+      setName(decoded.name);
+    } else {
+      navigate("/");
+    }
+  }, []);
   return (
     <>
       <div className="w-11/12  mt-16 top-1/2 mx-auto p-4 bg-white border-8 border-mainCol flex flex-row">
