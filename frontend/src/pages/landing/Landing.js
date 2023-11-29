@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie"; // or import cookie from 'cookie';
+import axios from "axios";
 
 function Landing() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -17,16 +18,47 @@ function Landing() {
       setLoggedIn(true);
     }
   }, []);
+
+  // ...
+
   const handleGoogleSignin = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
-    console.log("Decoded:", decoded);
-    Cookies.set("Name", decoded.name, {
-      expires: 365,
-    });
-    Cookies.set("storedCredential", credentialResponse.credential, {
-      expires: 365,
-    });
-    window.location.reload();
+
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/user/authUser",
+        {
+          name: decoded.name,
+          email: decoded.email,
+        }
+      );
+
+      if (response.status === 200) {
+        const uid = response.data; // Assuming the response contains the uid
+        // Store the uid on the frontend
+        // You can use state or any other method to store the uid
+        // For example, using useState hook:
+
+        console.log("Decoded:", decoded);
+        Cookies.set("Name", decoded.name, {
+          expires: 365,
+        });
+        Cookies.set("storedCredential", credentialResponse.credential, {
+          expires: 365,
+        });
+        Cookies.set("uid", uid, {
+          expires: 365,
+        });
+        console.log("UID: ", uid);
+        setLoggedIn(true);
+      } else {
+        console.log("Failed to authenticate user");
+      }
+
+      // window.location.reload();
+    } catch (error) {
+      console.log("Failed to authenticate user", error);
+    }
   };
 
   return (

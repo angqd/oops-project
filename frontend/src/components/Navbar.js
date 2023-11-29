@@ -37,7 +37,7 @@ function Navbar() {
         <Link
           to={"/dashboard"}
           className={`hover:text-white hover:underline hover:underline-offset-8 transition-all ${
-            location.pathname === "/dashboard" ? "text-white" : ""
+            location.pathname.includes("Dashboard") ? "text-white" : ""
           }`}
         >
           Dashboard
