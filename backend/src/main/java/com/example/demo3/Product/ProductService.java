@@ -15,10 +15,12 @@ public class ProductService {
     public ProductService(ProductRepo productRepo) {
         this.productRepo = productRepo;
     }
-    //getting product
+
+    //getting all products
     public List<Product> getProducts(){
         return productRepo.findAll();
     }
+
     // adding new product
 
     public void editbids(long id, double currentBid, long buyerId) {
@@ -51,5 +53,13 @@ public class ProductService {
         newProduct.setEndsAt(endsAt);
         newProduct.setCurrentBid(currentBid);
         productRepo.save(newProduct);
+    }
+
+    public List<Product> getProductsByUid(long uid) {
+        return productRepo.findByUid(uid);
+    }
+
+    public List<Product> getProductsByBuyerId(long buyerId) {
+        return productRepo.findByBuyerId(buyerId);
     }
 }

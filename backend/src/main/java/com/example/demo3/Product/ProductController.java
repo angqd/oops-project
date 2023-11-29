@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path="api/v1/products")
@@ -31,6 +32,22 @@ public class ProductController {
                 request.getEndsAt(),
                 request.getCurrentBid()
         );
+    }
+    //SELLER DASHBOARD
+    //find products by uid SELLER DASHBOARD
+    @GetMapping("/sellerDash")
+    public List<Product> getAllProductsByUid(@RequestBody Map<String, Long> requestBody){
+        long uid = requestBody.get("uid");
+        return productService.getProductsByUid(uid);
+    }
+    //BUYER DASHBOARD
+    // NOTE : As of now to edit the buyerId u need to use the /edit Post request
+    // by default its null
+
+    @GetMapping("/buyerDash")
+    public List<Product> getAllProductsByBuyerId(@RequestBody Map<String,Long> requestBody){
+        long buyerId = requestBody.get("uid");
+        return productService.getProductsByBuyerId(buyerId);
     }
     // edit bids (PLACE BID )
     @PostMapping(path = "/edit")
