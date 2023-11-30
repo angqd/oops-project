@@ -15,6 +15,34 @@ public class Categories {
             strategy = GenerationType.SEQUENCE,
             generator = "cat_sequence"
     )
-    private long catid;
-    
+    private long id;
+    private String name;
+
+    public Categories() {
+    }
+
+    public Categories(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Categories(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
