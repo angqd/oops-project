@@ -35,7 +35,7 @@ public class ProductController {
     }
     //SELLER DASHBOARD
     //find products by uid SELLER DASHBOARD
-    @GetMapping("/sellerDash")
+    @PutMapping("/sellerDash")
     public List<Product> getAllProductsByUid(@RequestBody Map<String, Long> requestBody){
         long uid = requestBody.get("uid");
         return productService.getProductsByUid(uid);
@@ -44,7 +44,7 @@ public class ProductController {
     // NOTE : As of now to edit the buyerId u need to use the /edit Post request
     // by default its null
 
-    @GetMapping("/buyerDash")
+    @PutMapping ("/buyerDash")
     public List<Product> getAllProductsByBuyerId(@RequestBody Map<String,Long> requestBody){
         long buyerId = requestBody.get("uid");
         return productService.getProductsByBuyerId(buyerId);
