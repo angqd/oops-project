@@ -1,5 +1,6 @@
 package com.example.demo3.Product;
 
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -62,4 +63,18 @@ public class ProductService {
     public List<Product> getProductsByBuyerId(long buyerId) {
         return productRepo.findByBuyerId(buyerId);
     }
+
+
+    // ProductService.java
+    public List<Product> fuzzySearchProducts(Long uid, String searchQuery) {
+        if (StringUtils.isEmpty(searchQuery)) {
+            // If the search query is empty, return all products with uid not equal to the provided uid
+            return productRepo.findByUidNot(uid);
+        } else {
+            // Perform fuzzy search with uid not equal to the provided uid
+            return productRepo.fuzzySearchProducts(uid, searchQuery);
+        }
+    }
+
+
 }

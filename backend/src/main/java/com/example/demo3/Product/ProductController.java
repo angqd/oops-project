@@ -2,6 +2,7 @@ package com.example.demo3.Product;
 
 import com.example.demo3.Product.RequestClasses.ProductAddRequest;
 import com.example.demo3.Product.RequestClasses.ProductEditRequest;
+import com.example.demo3.Product.RequestClasses.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,19 @@ public class ProductController {
     public void editBids(@RequestBody ProductEditRequest request) {
         productService.editbids(request.getId(), request.getCurrentBid(), request.getBuyerId());
     }
+
+
+
+    // ProductController.java
+
+    @PutMapping("/search")
+    public List<Product> fuzzySearchProducts(@RequestBody SearchRequest searchRequest) {
+        return productService.fuzzySearchProducts(searchRequest.getUid(), searchRequest.getSearchQuery());
+    }
+
+
+
+
 
 
 }

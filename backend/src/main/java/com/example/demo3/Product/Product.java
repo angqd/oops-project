@@ -43,11 +43,17 @@ public class Product {
 
     private long buyerId;
 
+
+
+    //stores url of thumbnail image
+    private String tImage;
+
+
     public Product() {
     }
 
     public Product(long id, long uid, String name, String description, double currentBid, boolean freezeBid, Long catId, boolean sold,
-                   LocalDateTime createdAt, LocalDateTime endsAt, Long buyerId) {
+                   LocalDateTime createdAt, LocalDateTime endsAt, Long buyerId,String tImage) {
         this.id = id;
         this.uid = uid;
         this.name = name;
@@ -59,10 +65,11 @@ public class Product {
         this.createdAt = createdAt;
         this.endsAt = endsAt;
         this.buyerId = buyerId;
+        this.tImage = tImage;
     }
 
     public Product(long uid, String name, String description, double currentBid, boolean freezeBid, Long catId, boolean sold, LocalDateTime createdAt,
-                   LocalDateTime endsAt, Long buyerId) {
+                   LocalDateTime endsAt, Long buyerId,String tImage) {
         this.uid = uid;
         this.name = name;
         this.description = description;
@@ -73,6 +80,7 @@ public class Product {
         this.createdAt = createdAt;
         this.endsAt = endsAt;
         this.buyerId = buyerId;
+        this.tImage =tImage;
     }
 
     public long getId() {
@@ -134,6 +142,7 @@ public class Product {
         return catId;
     }
 
+
     public void setCatId(Long catId) {
         this.catId = catId;
     }
@@ -159,6 +168,14 @@ public class Product {
 
     public void setBuyerId(long buyerId) {
         this.buyerId = buyerId;
+    }
+
+    public String gettImage() {
+        return tImage;
+    }
+
+    public void settImage(String tImage) {
+        this.tImage = tImage;
     }
 
 }
