@@ -43,9 +43,9 @@ public class ProductService {
         }
     }
 
-    public void addProduct( String name, String description, long uid,
+    public void addProduct(String name, String description, long uid,
                            LocalDateTime createdAt, LocalDateTime endsAt,
-                           double currentBid) {
+                           double currentBid, String tImage) {
         Product newProduct = new Product();
         newProduct.setName(name);
         newProduct.setDescription(description);
@@ -53,6 +53,7 @@ public class ProductService {
         newProduct.setCreatedAt(createdAt);
         newProduct.setEndsAt(endsAt);
         newProduct.setCurrentBid(currentBid);
+        newProduct.settImage(tImage);
         productRepo.save(newProduct);
     }
 

@@ -31,7 +31,9 @@ public class ProductController {
                 request.getUid(),
                 request.getCreatedAt(),
                 request.getEndsAt(),
-                request.getCurrentBid()
+                request.getCurrentBid(),
+                request.gettImage()
+
         );
     }
     //SELLER DASHBOARD

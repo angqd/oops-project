@@ -18,8 +18,17 @@ public class ProductAddRequest {
 
     private LocalDateTime createdAt;
     private LocalDateTime endsAt;
-   //  private long buyerId;
 
+    public String gettImage() {
+        return tImage;
+    }
+
+    public void settImage(String tImage) {
+        this.tImage = tImage;
+    }
+
+    //  private long buyerId;
+    private  String tImage;
 
 
 
