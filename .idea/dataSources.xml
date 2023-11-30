@@ -22,5 +22,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/bbuser</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="bbuser@localhost [3]" uuid="ea8dec4d-7df1-4828-9a78-47934d05ca4b">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/bbuser</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

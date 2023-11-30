@@ -11,6 +11,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [currentBid, setCurrentBid] = useState("");
   const [pid, setPid] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +27,16 @@ const Shop = () => {
       navigate("/");
     }
 
-    fetch("http://localhost:8080/api/v1/products")
+    fetch("http://localhost:8080/api/v1/products/search", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uid: Cookies.get("uid"),
+        searchQuery: "",
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -35,6 +45,27 @@ const Shop = () => {
         console.error("Error fetching products:", error);
       });
   }, []);
+
+  const searchProducts = () => {
+    const decoded = jwtDecode(Cookies.get("storedCredential"));
+    fetch("http://localhost:8080/api/v1/products/search", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uid: Cookies.get("uid"),
+        searchQuery: searchQuery,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error("Error searching products:", error);
+      });
+  };
 
   const renderProductDetails = () => {
     const product = products.find((product) => product.id === pid);
@@ -92,7 +123,12 @@ const Shop = () => {
                 />
               </svg>
             </button>
-            <div className="h-full w-1/2"></div>
+            <div className="h-full w-1/2">
+              <img
+                src={product.tImage ? product.tImage : ""}
+                className="h-full object-contain"
+              />
+            </div>
             <div className="h-full w-1/2 flex flex-col gap-8 py-10 px-4">
               <div className="border-4 border-mainCol bg-white h-auto p-4 flex flex-col justify-evenly">
                 <h1 className="font-bold text-2xl sm:text-2xl capitalize">
@@ -130,8 +166,8 @@ const Shop = () => {
                         }`}
                         onClick={() => {
                           if (currentBid > product.currentBid) {
-                            setCurrentBid(
-                              (prevBid) => prevBid - product.currentBid * 0.05
+                            setCurrentBid((prevBid) =>
+                              Math.round(prevBid - prevBid * 0.05)
                             );
                           }
                         }}
@@ -155,8 +191,8 @@ const Shop = () => {
                         stroke="currentColor"
                         className="w-8 h-8 plus hover:text-green-500 hover:rotate-180 transition-all cursor-pointer"
                         onClick={() => {
-                          setCurrentBid(
-                            (prevBid) => prevBid + product.currentBid * 0.05
+                          setCurrentBid((prevBid) =>
+                            Math.round(prevBid + prevBid * 0.05)
                           );
                         }}
                       >
@@ -203,6 +239,16 @@ const Shop = () => {
               d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
             />
           </svg>
+          <input
+            type="text"
+            className="w-1/4 border-2 border-gray-400"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                searchProducts();
+              }
+            }}
+          />
         </div>
         <h1>FILTER</h1>
         <h1>SORT</h1>
@@ -218,7 +264,7 @@ const Shop = () => {
               setCurrentBid(product.currentBid);
             }}
           >
-            <img src="book.jpg" alt="Book" className="h-48" />
+            <img src={product.tImage ? product.tImage : ""} className="h-48" />
             <h2 className="mt-2">
               Name: <span className="font-bold capitalize">{product.name}</span>
             </h2>

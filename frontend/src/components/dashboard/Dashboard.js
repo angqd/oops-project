@@ -43,7 +43,7 @@ const Dashboard = () => {
             Logout
           </button>
         </div>
-        <div className="bg-white p-4 border-4 border-mainCol flex flex-row justify-evenly">
+        <div className="bg-transparent shadow-xl p-4 border-4 border-mainCol flex flex-row justify-evenly">
           <img src="wallet.jpg" alt="wallet" className="h-40 object-center" />
           <div className="flex flex-col gap-2 justify-center">
             <h1 className="font-bold sm:text-xl text-black">
@@ -54,12 +54,30 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white border-4 border-mainCol p-8 flex flex-col justify-center items-center">
-          <h1>Email:{email}</h1>
-          <h1>Phone no:</h1>
-          <h1>Hostel:</h1>
-        </div>
-        <div className="bg-white border-4 border-mainCol flex flex-row justify-center">
+
+        <form className="bg-transparent px-4 flex flex-col gap-2 justify-evenly -mt-10">
+          <h1 className="font-bold text-lg">Email:</h1>
+          <input
+            type="text"
+            className="border-grey-400 border-2 border-grey-500 px-2 py-1 w-3/4"
+            defaultValue={email}
+            disabled
+          />
+          <h1 className="font-bold text-lg">Phone no:</h1>
+          <input
+            type="text"
+            className="border-grey-400 border-2 border-grey-500 px-2 py-1 w-3/4"
+          />
+          <h1 className="font-bold text-lg">Hostel:</h1>
+          <input
+            type="text"
+            className="border-grey-400 border-2 border-grey-500 px-2 py-1 w-3/4 bg-transparent"
+          />
+          <button className="bg-white text-mainCol border-mainCol border-2 cursor-pointer w-fit px-2 py-1 mt-4 hover:bg-mainCol hover:text-white transition-all">
+            Save Changes
+          </button>
+        </form>
+        <div className="bg-transparent shadow-xl border-4 border-mainCol flex flex-row justify-center">
           <div className=" p-8 flex flex-col justify-center items-center">
             {" "}
             <svg
