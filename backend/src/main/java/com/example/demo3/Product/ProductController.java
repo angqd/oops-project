@@ -33,7 +33,6 @@ public class ProductController {
                 request.getEndsAt(),
                 request.getCurrentBid(),
                 request.gettImage()
-
         );
     }
     //SELLER DASHBOARD
@@ -61,15 +60,23 @@ public class ProductController {
 
 
     // ProductController.java
-
     @PutMapping("/search")
     public List<Product> fuzzySearchProducts(@RequestBody SearchRequest searchRequest) {
         return productService.fuzzySearchProducts(searchRequest.getUid(), searchRequest.getSearchQuery());
     }
+    //Mark bid as frozen
+    @PostMapping(path = "/freeze")
+    public void markAsFrozen(@RequestBody Map<String,Long> request){
+        long pid = request.get("pid");
+        productService.markFrozen(pid);
+    }
 
-
-
-
+    //Mark Product as Sold
+    @PostMapping(path = "/sold")
+    public void markAsSold(@RequestBody Map<String,Long> request){
+        long pid = request.get("pid");
+        productService.markSold(pid);
+    }
 
 
 }

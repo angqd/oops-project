@@ -78,4 +78,21 @@ public class ProductService {
     }
 
 
+    public void markFrozen(long pid) {
+        Product product = productRepo.findById(pid).orElse(null);
+
+        if (product != null) {
+            product.setFreezeBid(true);
+            productRepo.save(product);
+        }
+    }
+
+    public void markSold(long pid) {
+        Product product = productRepo.findById(pid).orElse(null);
+
+        if (product != null) {
+            product.setSold(true);
+            productRepo.save(product);
+        }
+    }
 }
