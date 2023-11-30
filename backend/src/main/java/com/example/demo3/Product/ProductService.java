@@ -8,10 +8,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.demo3.Product.ProductChecker.setFreezeBidForTimeUp;
+
 @Service
 public class ProductService {
 
     private final ProductRepo productRepo;
+
 
     public ProductService(ProductRepo productRepo) {
         this.productRepo = productRepo;
@@ -58,11 +61,15 @@ public class ProductService {
     }
 
     public List<Product> getProductsByUid(long uid) {
-        return productRepo.findByUid(uid);
+        List<Product> products =  productRepo.findByUid(uid);
+        setFreezeBidForTimeUp(products);
+        return products;
     }
 
     public List<Product> getProductsByBuyerId(long buyerId) {
-        return productRepo.findByBuyerId(buyerId);
+        List<Product> products = productRepo.findByBuyerId(buyerId);
+        setFreezeBidForTimeUp(products);
+        return products;
     }
 
 
@@ -70,10 +77,14 @@ public class ProductService {
     public List<Product> fuzzySearchProducts(Long uid, String searchQuery) {
         if (StringUtils.isEmpty(searchQuery)) {
             // If the search query is empty, return all products with uid not equal to the provided uid
-            return productRepo.findByUidNot(uid);
+            List<Product> products = productRepo.findByUidNot(uid);
+            setFreezeBidForTimeUp(products);
+            return products;
         } else {
+            List<Product> products = productRepo.fuzzySearchProducts(uid, searchQuery);
+            setFreezeBidForTimeUp(products);
+            return products;
             // Perform fuzzy search with uid not equal to the provided uid
-            return productRepo.fuzzySearchProducts(uid, searchQuery);
         }
     }
 

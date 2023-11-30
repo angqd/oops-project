@@ -3,6 +3,7 @@ package com.example.demo3.Product;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="product_table")
@@ -177,5 +178,17 @@ public class Product {
     public void settImage(String tImage) {
         this.tImage = tImage;
     }
+
+    // Time check
+
+
+        // Assuming createdAt and endsAt are LocalDateTime fields
+
+    public boolean isTimeUp() {
+        // Assuming the times are not null, you may want to add null checks if needed
+        return endsAt != null && (endsAt.isBefore(LocalDateTime.now()) || endsAt.isEqual(LocalDateTime.now()));
+    }
+
+
 
 }

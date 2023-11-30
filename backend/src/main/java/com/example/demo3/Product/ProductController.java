@@ -45,7 +45,6 @@ public class ProductController {
     //BUYER DASHBOARD
     // NOTE : As of now to edit the buyerId u need to use the /edit Post request
     // by default its null
-
     @PutMapping ("/buyerDash")
     public List<Product> getAllProductsByBuyerId(@RequestBody Map<String,Long> requestBody){
         long buyerId = requestBody.get("uid");
@@ -77,6 +76,8 @@ public class ProductController {
         long pid = request.get("pid");
         productService.markSold(pid);
     }
+
+
 
 
 }
