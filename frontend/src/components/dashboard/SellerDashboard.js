@@ -8,7 +8,7 @@ const SellerDashboard = () => {
   useEffect(() => {
     const uid = Cookies.get("uid");
     fetch("http://localhost:8080/api/v1/products/sellerDash", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
