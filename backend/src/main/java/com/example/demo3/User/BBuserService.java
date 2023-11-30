@@ -38,9 +38,7 @@ public class BBuserService {
             throw new IllegalStateException("email already in use ");
         }
         String username = bbuser.getUsername();
-        bbuser.setUsername(username);
-        String password = bbuser.getPassword();
-        bbuser.SetPassword(password);
+        bbuser.setUsername();
 
         // Create and save a wallet for the user
         Wallet wallet = new Wallet();
@@ -48,19 +46,10 @@ public class BBuserService {
         walletRepo.save(wallet);
         userRepo.save(bbuser);
     }
-    // PUT username password and get back uid
-    public Long authandgetUid(String username, String password){
-        // find the user using the username
-        BBuser bbuser = userRepo.findUsersByUsername(username);
 
-        //check if it exists and verify the password
-        if(bbuser!=null && BCrypt.checkpw(password,bbuser.getPassword())){
-            return bbuser.getId();
-        }
-        return null;
-    }
+    // PUT Name and Email -> creates user or sends id of the user
 
-    public Long authOrCreateUser(String email, String password){
+    public Long authOrCreateUser(String email, String name){
         BBuser existingUser = userRepo.findUsersViaEmail(email);
         if(existingUser!=null){
 
@@ -68,7 +57,8 @@ public class BBuserService {
         }else{
             BBuser newUser = new BBuser();
             newUser.setEmail(email);
-            newUser.SetPassword(password);
+            newUser.setName(name);
+            newUser.setUsername();
             userRepo.save(newUser);
 
 
@@ -82,4 +72,12 @@ public class BBuserService {
     }
 
 
+    public void editUser(long id, String name, String hostel, long phoneNumber) {
+        BBuser bbuser = userRepo.findBBuserById(id);
+        bbuser.setName(name);
+        bbuser.setUsername();
+        bbuser.setHostel(hostel);
+        bbuser.setPhoneNumber(phoneNumber);
+        userRepo.save(bbuser);
+    }
 }

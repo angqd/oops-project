@@ -1,5 +1,6 @@
 package com.example.demo3.User;
 
+import com.example.demo3.User.RequestClasses.EditUserRequest;
 import com.example.demo3.User.Wallet.WalletController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,15 @@ public class BBuserController {
         String email = request.get("email");
         String name = request.get("name");
         return userService.authOrCreateUser(email,name);
+    }
+    //EDIT USER ENDPOINT
+    @PostMapping("/editUser")
+    public void EditUser(@RequestBody EditUserRequest request){
+        long id = request.getId();
+        String name = request.getName();
+        String hostel = request.getHostel();
+        long phoneNumber = request.getPhoneNumber();
+        userService.editUser(id,name,hostel,phoneNumber);
     }
 
 }

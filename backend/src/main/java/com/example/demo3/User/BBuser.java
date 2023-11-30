@@ -42,7 +42,7 @@ public class BBuser {
         this.hostel = hostel;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         this.phoneNumber = phoneNumber;
-        setDefaultUsername();
+        setUsername();
     }
 
     public BBuser(String name, String email, String hostel, String password, long phoneNumber) {
@@ -51,10 +51,10 @@ public class BBuser {
         this.hostel = hostel;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         this.phoneNumber = phoneNumber;
-        setDefaultUsername();
+        setUsername();
     }
 // AUTOMATICALLY PICKS FIRST ALPHABET AS USERNAME
-    private void setDefaultUsername(){
+    public void setUsername(){
         if(name != null && !name.isEmpty()){
             this.username = name.substring(0,1).toLowerCase();
         }else
@@ -88,11 +88,6 @@ public class BBuser {
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-        setDefaultUsername();;
     }
 
     public long getPhoneNumber() {
