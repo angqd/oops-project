@@ -22,26 +22,26 @@ public class Conversations {
     private long id;
     private long pid;
     private long sellid;
-    private long buyerid;
+    private long buyerId;
     private LocalDateTime timeOfLastMessage;
     private  long senderOfLastMessage;
 
     public Conversations() {
     }
 
-    public Conversations(long id, long pid, long sellid, long buyerid, LocalDateTime timeOfLastMessage, long senderOfLastMessage) {
+    public Conversations(long id, long pid, long sellid, long buyerId, LocalDateTime timeOfLastMessage, long senderOfLastMessage) {
         this.id = id;
         this.pid = pid;
         this.sellid = sellid;
-        this.buyerid = buyerid;
+        this.buyerId = buyerId;
         this.timeOfLastMessage = timeOfLastMessage;
         this.senderOfLastMessage = senderOfLastMessage;
     }
 
-    public Conversations(long pid, long sellid, long buyerid, LocalDateTime timeOfLastMessage) {
+    public Conversations(long pid, long sellid, long buyerId, LocalDateTime timeOfLastMessage) {
         this.pid = pid;
         this.sellid = sellid;
-        this.buyerid = buyerid;
+        this.buyerId = buyerId;
         this.timeOfLastMessage = timeOfLastMessage;
     }
 
@@ -69,12 +69,12 @@ public class Conversations {
         this.sellid = sellid;
     }
 
-    public long getBuyerid() {
-        return buyerid;
+    public long getBuyerId() {
+        return buyerId;
     }
 
-    public void setBuyerid(long buyerid) {
-        this.buyerid = buyerid;
+    public void setBuyerId(long buyerid) {
+        this.buyerId = buyerid;
     }
 
     public LocalDateTime getTimeOfLastMessage() {

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ConversationsRepo extends JpaRepository<Conversations,Long> {
 
+    Conversations findByPidAndBuyerId(long pid, long buyerId);
 }
