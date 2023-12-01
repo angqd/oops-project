@@ -80,4 +80,9 @@ public class BBuserService {
         bbuser.setPhoneNumber(phoneNumber);
         userRepo.save(bbuser);
     }
+
+    public String getUsernameUid(Long id){
+        BBuser bbuser = userRepo.findBBuserById(id);
+        return bbuser.getUsername();
+    }
 }

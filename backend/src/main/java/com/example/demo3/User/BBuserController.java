@@ -49,5 +49,11 @@ public class BBuserController {
         long phoneNumber = request.getPhoneNumber();
         userService.editUser(id,name,hostel,phoneNumber);
     }
+    //GET USERNAME FROM UID
+    @PutMapping("/getUsername")
+    public String getUsername(@RequestBody Map<String,Long> requestbody){
+       Long uid =  requestbody.get("id");
+       return userService.getUsernameUid(uid);
+    }
 
 }
