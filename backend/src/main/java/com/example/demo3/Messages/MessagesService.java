@@ -3,6 +3,8 @@ package com.example.demo3.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MessagesService {
     private final MessagesRepo messagesRepo;
@@ -21,5 +23,9 @@ public class MessagesService {
                 request.getMessageBody()
         );
         messagesRepo.save(newMessage);
+    }
+
+    public List<Messages> getMfromC(long cid) {
+        return messagesRepo.findByConversationId(cid);
     }
 }

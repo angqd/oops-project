@@ -6,6 +6,7 @@ import com.example.demo3.Product.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,9 @@ public class ConversationsService {
             conversationsRepo.save(newConvo);
             return newConvo.getId();
         }
+    }
+
+    public List<Conversations> getConversations(long uid) {
+        return conversationsRepo.findBySellidOrBuyerId(uid,uid);
     }
 }

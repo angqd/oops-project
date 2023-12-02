@@ -85,4 +85,9 @@ public class BBuserService {
         BBuser bbuser = userRepo.findBBuserById(id);
         return bbuser.getUsername();
     }
+
+    public BBuser getUserByID(Long uid) {
+        BBuser bBuser = userRepo.findBBuserById(uid);
+        return bBuser;
+    }
 }

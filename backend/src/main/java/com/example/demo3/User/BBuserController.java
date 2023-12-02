@@ -55,5 +55,11 @@ public class BBuserController {
        Long uid =  requestbody.get("id");
        return userService.getUsernameUid(uid);
     }
+    //GET ALL USER BY UID
+    @PutMapping("/getUserById")
+    public BBuser getUserById(@RequestBody Map<String,Long> requestbody ){
+        Long uid =  requestbody.get("uid");
+        return userService.getUserByID(uid);
+    }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,5 +23,11 @@ private final ConversationsService convosService;
         long buyerId = request.get("buyerId");
 
         return convosService.newConvo(pid,buyerId);
+    }
+    //get all conversations from uid
+    @PutMapping("/convoOfUid")
+    List<Conversations> getConversations(@RequestBody Map<String,Long> request){
+        long uid = request.get("uid");
+        return convosService.getConversations(uid);
     }
 }
