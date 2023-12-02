@@ -26,23 +26,32 @@ public class Conversations {
     private LocalDateTime timeOfLastMessage;
     private  long senderOfLastMessage;
 
+
+
+    private String sellUsername;
+    private String buyerUsername;
+
+    private String productName;
+
     public Conversations() {
     }
 
-    public Conversations(long id, long pid, long sellid, long buyerId, LocalDateTime timeOfLastMessage, long senderOfLastMessage) {
+    public Conversations(long id, long pid, long sellid, long buyerId, LocalDateTime timeOfLastMessage, long senderOfLastMessage, String sellUsername, String buyerUsername) {
         this.id = id;
         this.pid = pid;
         this.sellid = sellid;
         this.buyerId = buyerId;
         this.timeOfLastMessage = timeOfLastMessage;
         this.senderOfLastMessage = senderOfLastMessage;
+        this.sellUsername = sellUsername;
+        this.buyerUsername = buyerUsername;
     }
 
-    public Conversations(long pid, long sellid, long buyerId, LocalDateTime timeOfLastMessage) {
+    public Conversations(long pid, long sellid, long buyerId, long senderOfLastMessage) {
         this.pid = pid;
         this.sellid = sellid;
         this.buyerId = buyerId;
-        this.timeOfLastMessage = timeOfLastMessage;
+        this.senderOfLastMessage = senderOfLastMessage;
     }
 
     public long getId() {
@@ -93,4 +102,27 @@ public class Conversations {
         this.senderOfLastMessage = senderOfLastMessage;
     }
 
+    public String getSellUsername() {
+        return sellUsername;
+    }
+
+    public void setSellUsername(String sellUsername) {
+        this.sellUsername = sellUsername;
+    }
+
+    public String getBuyerUsername() {
+        return buyerUsername;
+    }
+
+    public void setBuyerUsername(String buyerUsername) {
+        this.buyerUsername = buyerUsername;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 }

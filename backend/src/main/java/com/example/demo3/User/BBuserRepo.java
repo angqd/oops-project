@@ -16,5 +16,8 @@ public interface BBuserRepo extends JpaRepository<BBuser,Long> {
     BBuser findUsersViaEmail(String email);
 
     BBuser findBBuserById(long id);
+
+    @Query("SELECT u.username FROM BBuser u WHERE u.id = :Id")
+    String findUsernameById(long Id);
 }
 //find by email
