@@ -19,7 +19,7 @@ public class MessagesControlller {
     public void createMessage(@RequestBody AddMessageRequest request){
         messagesService.createMessage(request);
     }
-    @PostMapping(path = "/getConvoMessages")
+    @PutMapping (path = "/getConvoMessages")
     public List<Messages> getAllMessagesFromConvo(@RequestBody Map<String,Long> request){
         long cid = request.get("conversationId");
         return messagesService.getMfromC(cid);
